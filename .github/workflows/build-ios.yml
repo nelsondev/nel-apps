@@ -1,0 +1,26 @@
+name: Build NelApps SideStore IPA
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+jobs:
+  build:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install XcodeGen
+        run: brew install xcodegen
+      - name: Generate Xcode project
+        run: xcodegen generate
+      - name: Build unsigned app
+        run: |
+          xcodebuild -project NelApps.xcodeproj -scheme NelApps -configuration Release -sdk iphoneos -destination 'generic/platform=iOS' -derivedDataPath build CODE_SIGNING_ALLOWED=NO SWIFT_OPTIMIZATION_LEVEL=-Onone SWIFT_COMPILATION_MODE=singlefile build
+      - name: Package IPA
+        run: |
+          mkdir -p Payload
+          cp -R build/Build/Products/Release-iphoneos/NelApps.app Payload/
+          zip -qry NelApps-SideStore.ipa Payload
+      - uses: actions/upload-artifact@v4
+        with:
+          name: NelApps-SideStore-IPA
+          path: NelApps-SideStore.ipa
