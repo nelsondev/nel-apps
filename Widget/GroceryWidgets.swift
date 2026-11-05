@@ -31,7 +31,9 @@ struct GroceryWidget: Widget {
                 if entry.items.isEmpty { Text("All caught up").foregroundStyle(.secondary) }
                 if entry.items.count > 5 { Text("+\(entry.items.count - 5) more").font(.caption).foregroundStyle(.secondary) }
                 Spacer(minLength: 0)
-            }.padding()
+            }
+            .padding()
+            .containerBackground(.fill.tertiary, for: .widget)
         }
         .configurationDisplayName("Grocery List")
         .description("Your shared grocery list, with quick purchase buttons.")
