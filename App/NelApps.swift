@@ -11,11 +11,11 @@ struct NelAppsHome: View {
             List {
                 Section {
                     NavigationLink { GroceryView().toolbar(.hidden, for: .tabBar) } label: {
-                        Label { VStack(alignment: .leading, spacing: 3) { Text("Groceries").font(.headline); Text("Shopping list and Live Activity").font(.subheadline).foregroundStyle(.secondary) } } icon: { Image(systemName: "basket.fill").foregroundStyle(.green).font(.title2).frame(width: 36) }
+                        VStack(alignment: .leading, spacing: 3) { Text("Groceries").font(.headline); Text("Shopping list and Live Activity").font(.subheadline).foregroundStyle(.secondary) }
                             .padding(.vertical, 8)
                     }
                     NavigationLink { ReefRootView() } label: {
-                        Label { VStack(alignment: .leading, spacing: 3) { Text("Reef Log").font(.headline); Text("Water testing, trends and maintenance").font(.subheadline).foregroundStyle(.secondary) } } icon: { Image(systemName: "water.waves").foregroundStyle(.cyan).font(.title2).frame(width: 36) }
+                        VStack(alignment: .leading, spacing: 3) { Text("Reef Log").font(.headline); Text("Water testing, trends and maintenance").font(.subheadline).foregroundStyle(.secondary) }
                             .padding(.vertical, 8)
                     }
                 } header: { Text("Your apps") }
